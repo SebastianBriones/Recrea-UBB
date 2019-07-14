@@ -5,20 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>Collapsible sidebar using Bootstrap 4</title>
-
-    <!-- Bootstrap CSS CDN -->
+    <title>RecreaUbb</title>
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <!-- Our Custom CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="../css/style2.css">
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-<!-- Imagen Script y Css -->
+    <!-- Script de la Imagen -->
     <link rel="stylesheet" href="../css/chosen.css">
 	<link rel="stylesheet" href="../css/ImageSelect.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -74,15 +71,8 @@
                     <a href="#">Contact</a>
                 </li>
             </ul>
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                </li>
-            </ul>
         </nav>
-		
-		
-		
+
         <!-- Contenido de la Pagina  -->
         <div id="content">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -116,12 +106,16 @@
             <form class="formulario" action="" method="post" id="usrform">
               <h2>Nuevo Evento</h2>
               <div class="form-group">
-                <label for="inputTitulo">Nombre</label>
-                <input type="text" id="inputTitulo" class="form-control" placeholder="Escriba el nombre del evento"  >
+                <label for="inputNombre">Nombre</label>
+                <input type="text" id="inputNombre" name="EVE_NOMBRE" class="form-control" placeholder="Escriba el nombre del evento"  >
+              </div>
+			   <div class="form-group">
+                <label for="inputTitulo">Cat correl</label>
+                <input type="text" id="inputTitulo" name="CAT_CORREL" class="form-control" placeholder=""  >
               </div>
               <div class="form-group">
                 <label for="inputFecha">Fecha</label>
-                <input type="date" id="inputFecha" class="form-control" placeholder="Fecha" >
+                <input type="date" id="inputFecha"name="EVE_FECHA" class="form-control" placeholder="Fecha" >
               </div>
               <div class="form-group">
                     <label for="inputFecha">Ubicación</label>
@@ -133,36 +127,25 @@
                 <script>
                     $(".my-select").chosen({width:"30%"});
                 </script>
-                <div class="form-group">
-                    <label for="inputFecha">Sala</label>
-                    <input type="text" id="inputFecha" class="form-control" placeholder="" >
-                </div>
               <div class="form-group">
-                <label for="inputFecha">Hora</label>
-                <input type="time" id="inputFecha" class="form-control" placeholder="Fecha" >
+                <label for="inputHora">Hora</label>
+                <input type="time" id="inputFecha"name="EVE_HORA" class="form-control" placeholder="Fecha" >
               </div>
               <div class="form-group">
-                <label for="inputFecha">Descripción</label>
-                <input type="text" id="inputFecha" class="form-control" placeholder="" >
-              </div>
+                <label for="inputDescripcion">Descripción</label></br>
+                 <textarea name="EVE_DESCRIP" rows="5" cols="55" Required></textarea>
+			  </div>
               <div class="form-group">
-                <label for="inputFecha">Archivo(Opcional)</label>
-                <input type="file" id="inputFecha" class="form-control" placeholder="Fecha" >
+                <label for="inputFecha">Imagen(Opcional)</label>
+                <input type="file" id="inputImagen" name="imagen" size="20" class="form-control" placeholder="Imagen" >
               </div>
-                <input type="text" id="CAT_CORREL" class="form-control" placeholder="" >
+              
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" name="submit">Registrar</button>
             </form>
  
         </div>
     </div>
- 
- 
- 
- 
- 
- 
- 
- 
+
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
@@ -186,21 +169,20 @@
         });
     </script>
 </body>
-
 </html>
 
 <?php
- 
-// Funcion insertar
-
 include("GuardarEvento.php");
  if(isset($_POST['submit'])){
+    $campos = array("EVE_CORREL"=>$_POST['NULL'],"CAT_CORREL"=>$_POST['CAT_CORREL'],
+	"EVE_NOMBRE"=>$_POST['EVE_NOMBRE'],"EVE_FECHA"=>$_POST['EVE_FECHA']
+	,"EVE_HORA"=>$_POST['EVE_HORA'],"EVE_DESCRIP"=>$_POST['EVE_DESCRIP']); 
  
-    $campos = array("EVE_CORREL"=>$_POST['NULL'], "CAT_CORREL"=>$_POST['CAT_CORREL']); 
-  
-   $a = new GuardarEvento("recreaubb"); //con parametro para el construct
-   $a->insertar($campos);
- 
+    $a = new GuardarEvento("recreaubb"); 
+    $a->insertar($campos);
  }
  
 ?>
+
+
+
