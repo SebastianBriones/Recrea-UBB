@@ -13,8 +13,7 @@ mysqli_set_charset($conexion_db,"utf8");
 
 $nombre_archivo=($_FILES['archivo']['name']);
 $tipo_archivo=($_FILES['archivo']['type']);
-//$imageData=(file($_FILES['archivo']['tmp_name']));// necesita addslashes pero con esto no al sube
- $imageData = addslashes(file_get_contents($_FILES['archivo']['tmp_name']));
+$imageData = addslashes(file_get_contents($_FILES['archivo']['tmp_name']));
  
  
 $consulta=" INSERT INTO `edificiotest` (`id`, `nombre`, `tipo`, `archivo`) VALUES 

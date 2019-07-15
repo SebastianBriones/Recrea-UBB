@@ -26,6 +26,7 @@ $resultado = mysqli_query($conexion_db,$consulta);
 				$nombre=$fila["nombre"];
 				$tipo=$fila["tipo"];
 				$contenido=$fila["archivo"];
+				echo "<br>";
 				echo $id;
 				echo "<br>";
 				echo $nombre;
@@ -34,17 +35,30 @@ $resultado = mysqli_query($conexion_db,$consulta);
 				echo "<br>";
 				
 				
-				 
-              echo '<img src="data:image/png;base64,'.base64_encode( $contenido ).'"/>';
- }
+				
+			if($tipo == 'image/jpeg' || $tipo == 'image/jpg' || $tipo == 'image/png' || $tipo == 'image/gif'){
+                echo "<br>";
+                echo "Mostrando imagen: <br>" . "<img src='data:$tipo; base64," . base64_encode($contenido) . "'>";
+                
+            }else if ($tipo == 'text/plain' || $tipo == 'application/pdf'){
+                echo "<br>Mostrando texto o pdf.<br>";
+        ?> <!-- Cerramos temporalmente php-->
+        
+            <object data="data:<?php echo $tipo ?>;base64,<?php echo base64_encode($contenido) ?>" type="<?php echo $tipo ?>" style="height:600px;width:60%"></object>
+        
+       <?php // volvemos a abrir php para cerrar el if
+           }else{ 
+		   echo"Formato no reconocido";
+		   } // end if elif else 
+          
+
+// echo '<img src="data:image/png;base64,'.base64_encode( $contenido ).'"/>';
+
+
+ }	  
+        ?>	
+				
  
-?>
-<div>
- 
-
-
- </div>
-
 
 
 
