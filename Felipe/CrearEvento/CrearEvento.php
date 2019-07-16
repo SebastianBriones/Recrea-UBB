@@ -103,7 +103,7 @@
                 </div>
             </nav>
   
-            <form class="formulario" action="" method="post" id="usrform">
+            <form class="formulario" action="" method="post" id="usrform" enctype="multipart/form-data">
               <h2>Nuevo Evento</h2>
               <div class="form-group">
                 <label for="inputNombre">Nombre</label>
@@ -137,7 +137,7 @@
 			  </div>
               <div class="form-group">
                 <label for="inputFecha">Imagen(Opcional)</label>
-                <input type="file" id="inputImagen" name="imagen" size="20" class="form-control" placeholder="Imagen" >
+                <input type="file" id="inputImagen" name="ARCHIVO" size="20" class="form-control" placeholder="Imagen" >
               </div>
               
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" name="submit">Registrar</button>
@@ -176,7 +176,7 @@ include("GuardarEvento.php");
  if(isset($_POST['submit'])){
     $campos = array("EVE_CORREL"=>$_POST['NULL'],"CAT_CORREL"=>$_POST['CAT_CORREL'],
 	"EVE_NOMBRE"=>$_POST['EVE_NOMBRE'],"EVE_FECHA"=>$_POST['EVE_FECHA']
-	,"EVE_HORA"=>$_POST['EVE_HORA'],"EVE_DESCRIP"=>$_POST['EVE_DESCRIP']); 
+	,"EVE_HORA"=>$_POST['EVE_HORA'],"EVE_DESCRIP"=>$_POST['EVE_DESCRIP'],"IMAGEN"=>$_POST['IMAGEN']); 
  
     $a = new GuardarEvento("recreaubb"); 
     $a->insertar($campos);
