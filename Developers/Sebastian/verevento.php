@@ -32,27 +32,41 @@
 </head>
 <body>
 
+<section class="ficha-evento">
 	<div class="wrapper">
-	<?php
-		include("barra.php");
-	?>
-		<div id="content">
 		<?php
+		include("barra.php");
+		?>
+		<div id="content">
+			<?php
 			include("barra2.php");
 
 			include("conexion.php");
 
 			$result = mysqli_query($conn, 'SELECT * 
 									  	   FROM EVENTO E
+									  	   INNER JOIN REALIZA R ON E.EVE_CORREL = R.EVE_CORREL
+									  	   INNER JOIN ESPACIO S ON R.ESP_CORREL = S.ESP_CORREL
+									  	   INNER JOIN EDIFICIO D ON S.EDI_CORREL = D.EDI_CORREL
 									       WHERE E.EVE_CORREL ='.$value.';');
 
 			while($row = mysqli_fetch_array($result)){
 				echo '<h3>Nombre del evento</h3></br>'.$row["EVE_NOMBRE"].'</br></br>';
+				echo '<h6>Fecha</h6></br>'.$row["EVE_FECHA"].'</br></br>';
+				echo '<h6>Hora</h6></br>'.$row["EVE_HORA"].'</br></br>';
+				echo '<h6>Lugar</h6></br>'.$row["ESP_NOMBRE"].'</br></br>';
+				echo '<h6>Ubicación</h6></br>'.$row["EDI_NOMBRE"].'</br></br>';
+				echo '<h6>Info</h6></br>'.$row["EVE_DESCRIP"].'</br></br>';
 				echo '<img src="data:image/png;base64,'.base64_encode( $row["IMAGEN"] ).'"/>';
 			}
-		?>
+			?>
+
+
+			<!-- Mapa UBB en Google Maps 
+			<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1WpK45PFQR-uS5E5pAkZG6GnpSApLyqpR" width="640" height="480"></iframe>-->
 		</div>
 	</div>
+</section>
 
 </body>
 </html>

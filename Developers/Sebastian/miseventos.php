@@ -1,26 +1,16 @@
 <?php
-	//error_reporting(E_ALL);
-	//ini_set('display_errors', '1');
+
+	error_reporting(E_ALL);
+	ini_set('display_errors', '1');
 
 	session_start();
 
-	if($_SESSION["rol"] == 1){
-		echo "Sesión Estudiante.";
-	}
-
-	if($_SESSION["rol"] == 2){
-		echo "Sesión Académico.";
-	}
-
-	if($_SESSION["rol"] == 3){
-		echo "Sesión Administrativo.";
-	}
-
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Recrea UBB - Inicio</title>
+	<title>Recrea UBB - Mis Eventos</title>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,7 +33,6 @@
 </head>
 <body>
 
-
 <div class="wrapper">
 	<?php
 		include("barra.php");
@@ -61,7 +50,7 @@
 						<h3>Eventos</h3>
 					</div>
 					<!--Lista para filtrar eventos-->
-					<div class="eventos-filtros">
+					<div class="filtra-categorias">
 						<select class="categorias" id="categoria" name="categoria" onchange="functioneventos()">
 							<option value="0" selected>Todas las categorías</option>
 							<option value="1">Música</option>
@@ -69,6 +58,15 @@
 							<option value="3">Teatro</option>
 							<option value="4">Charlas</option>
 							<option value="5">Familia</option>
+						</select>
+					</div>
+					<div class="filtra-estados">
+						<select class="estados" id="estado" name="estado" onchange="functioneventos()">
+							<option value="0" selected>Todos los estados</option>
+							<option value="1">Activos</option>
+							<option value="2">Finalizados</option>
+							<option value="3">En revisión</option>
+							<option value="4">Requiere cambios</option>
 						</select>
 					</div>
 				</div>
@@ -86,6 +84,7 @@
 		//Función que otorga por defecto el valor de "Todas las categorias de eventos"
 		window.onload = function eventos(){
 			console.log(document.getElementById("categoria").value);
+			console.log(document.getElementById("estado").value);
 			//div muestra un mensaje de carga.
 			document.getElementById("lista-eventos").innerHTML = "Cargando. Por favor espere.";
 
@@ -97,22 +96,25 @@
 					document.getElementById("lista-eventos").innerHTML = this.responseText;
 
 					console.log(document.getElementById("categoria").value);
+					console.log(document.getElementById("estado").value);
 
 
 				}
 			}
 
             //Se desclaran las variables que pasaran al otro archivo .php
-			value = 0;
+			value1 = 0;
+			value2 = 0;
 
             //Se envian las variables
-			xmlhttp.open("GET", 'mostrareventos.php?value=' + value, true);
+			xmlhttp.open("GET", 'muestramiseventos.php?value1=' + value1 + '&value2=' + value2, true);
 			xmlhttp.send();
 		}
 
 		//Función que muestra los eventos segun categoria especificada en la lista
  		function functioneventos(){
 			console.log(document.getElementById("categoria").value);
+			console.log(document.getElementById("estado").value);
 			//div muestra un mensaje de carga.
 			document.getElementById("lista-eventos").innerHTML = "Cargando. Por favor espere.";
 
@@ -124,16 +126,18 @@
 					document.getElementById("lista-eventos").innerHTML = this.responseText;
 
 					console.log(document.getElementById("categoria").value);
+					console.log(document.getElementById("estado").value);
 
 
 				}
 			}
 
             //Se desclaran las variables que pasaran al otro archivo .php
-			value = document.getElementById("categoria").value;
+			value1 = document.getElementById("categoria").value;
+			value2 = document.getElementById("estado").value;
 
             //Se envian las variables
-			xmlhttp.open("GET", 'mostrareventos.php?value=' + value, true);
+			xmlhttp.open("GET", 'muestramiseventos.php?value1=' + value1 + '&value2=' + value2, true);
 			xmlhttp.send();
 		}
 

@@ -9,13 +9,13 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="iniciorecreaubb.php">Inicio</a>
+                    <a href="iniciorecreaubb.php#">Inicio</a>
                 </li>
                 <li>
                     <a href="crearevento.php">Nuevo evento</a>
                 </li>
                 <li>
-                    <a href="#pageSubmenu">Mis eventos</a>
+                    <a href="miseventos.php">Mis eventos</a>
                 </li>
                 <li>
                     <a href="#">Solicitudes</a>
