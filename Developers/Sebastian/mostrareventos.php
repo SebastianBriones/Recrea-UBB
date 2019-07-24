@@ -14,13 +14,13 @@
 									   INNER JOIN REALIZA R ON E.EVE_CORREL = R.EVE_CORREL
 									   INNER JOIN ESPACIO S ON R.ESP_CORREL = S.ESP_CORREL
 									   INNER JOIN EDIFICIO D ON S.EDI_CORREL = D.EDI_CORREL
-									   WHERE E.EVE_ESTADO = 1');
+									   WHERE E.EST_CORREL = 1');
 
 		while($row = mysqli_fetch_array($result)){
 		?>
 			<div class="row">
 				<div class="col-6 col-md-4 col-lg-3 col-x1-2 js-col-evento">
-					<a href="verevento2.php?value=<?php echo $row["EVE_CORREL"]; ?>" class="evento" id="<?php echo $row["EVE_CORREL"]; ?>">
+					<a href="verevento.php?value=<?php echo $row["EVE_CORREL"]; ?>" class="evento" id="<?php echo $row["EVE_CORREL"]; ?>">
 						<?php echo '<img style="width:250px;height:210px;" src="data:image/png;base64,'.base64_encode( $row["IMAGEN"] ).'"/>';?>
 						<div class="titulo">
 							<h5><?php echo $row["EVE_NOMBRE"] ?></h5>
@@ -40,14 +40,14 @@
 								  	   INNER JOIN REALIZA R ON E.EVE_CORREL = R.EVE_CORREL
 									   INNER JOIN ESPACIO S ON R.ESP_CORREL = S.ESP_CORREL
 									   INNER JOIN EDIFICIO D ON S.EDI_CORREL = D.EDI_CORREL
-								       WHERE E.EVE_ESTADO = 1
+								       WHERE E.EST_CORREL = 1
 								         AND E.CAT_CORREL = '.$value.';');
 
 		while($row = mysqli_fetch_array($result)){
 		?>
 			<div class="row">
 				<div class="col-6 col-md-4 col-lg-3 col-x1-2 js-col-evento">
-					<a href="verevento2.php?value=<?php echo $row["EVE_CORREL"] ?>" class="evento" id="<?php echo $row["EVE_CORREL"]; ?>">
+					<a href="verevento.php?value=<?php echo $row["EVE_CORREL"] ?>" class="evento" id="<?php echo $row["EVE_CORREL"]; ?>">
 						<?php echo '<img style="width:250px;height:210px;" src="data:image/png;base64,'.base64_encode( $row["IMAGEN"] ).'"/>';?>
 						<div class="titulo">
 							<h5><?php echo $row["EVE_NOMBRE"] ?></h5>
