@@ -3,6 +3,8 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', '1');
 
+	session_start();
+
 	//Se recibe el valor de la busqueda de evento especificada
 	$busqueda = $_GET["busqueda"];
 

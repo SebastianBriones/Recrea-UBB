@@ -8,24 +8,43 @@
                 </a>
             </div>
             <ul class="list-unstyled components">
+
                 <li>
                     <a href="iniciorecreaubb.php#">Inicio</a>
                 </li>
+
+                <?php if($_SESSION["rol"] == 1 || $_SESSION["rol"] == 2): ?>
                 <li>
                     <a href="crearevento.php">Nuevo evento</a>
                 </li>
+
                 <li>
                     <a href="miseventos.php">Mis eventos</a>
                 </li>
+
                 <li>
-                    <a href="#">Solicitudes</a>
+                    <a href="respuestas.php">Respuestas solicitudes</a>
                 </li>
+
                 <li>
-                    <a href="#">Todos los eventos</a>
+                    <a href="participaciones.php">Mis participaciones</a>
                 </li>
+                <?php endif; ?>
+
+                <?php if($_SESSION["rol"] == 3): ?>
                 <li>
-                    <a href="#"></a>
+                    <a href="solicitudes.php">Solicitudes</a>
                 </li>
+
+                <li>
+                    <a href="historialsolicita.php">Historial solicitudes</a>
+                </li>
+
+                <li>
+                    <a href="historial.php">Historial eventos</a>
+                </li>
+                <?php endif; ?>
+                
             </ul>
         </nav>
     </div>

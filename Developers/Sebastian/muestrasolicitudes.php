@@ -7,14 +7,14 @@
 
 	include("conexion.php");
 
-	//Si el valor recibido es 0 se muestras todos los eventos de todas las categorias y disponibles
+	//Si el valor recibido es 0 se muestras todos los eventos de todas las categorias y "EN REVISION"
 	if($value == 0){
 		$result = mysqli_query($conn, 'SELECT *
 									   FROM EVENTO E
 									   INNER JOIN REALIZA R ON E.EVE_CORREL = R.EVE_CORREL
 									   INNER JOIN ESPACIO S ON R.ESP_CORREL = S.ESP_CORREL
 									   INNER JOIN EDIFICIO D ON S.EDI_CORREL = D.EDI_CORREL
-									   WHERE E.EST_CORREL = 1');
+									   WHERE E.EST_CORREL = 3');
 
 		while($row = mysqli_fetch_array($result)){
 		?>
@@ -33,14 +33,14 @@
 			</div>
 		<?php
 		}
-	//En caso contrario se muestran los eventos de la categoria especificada y que esten disponibles
+	//En caso contrario se muestran los eventos de la categoria especificada y que esten "EN REVISION"
 	}else{
 		$result = mysqli_query($conn, 'SELECT *
 								  	   FROM EVENTO E
 								  	   INNER JOIN REALIZA R ON E.EVE_CORREL = R.EVE_CORREL
 									   INNER JOIN ESPACIO S ON R.ESP_CORREL = S.ESP_CORREL
 									   INNER JOIN EDIFICIO D ON S.EDI_CORREL = D.EDI_CORREL
-								       WHERE E.EST_CORREL = 1
+								       WHERE E.EST_CORREL = 3
 								         AND E.CAT_CORREL = '.$value.';');
 
 		while($row = mysqli_fetch_array($result)){
