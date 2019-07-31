@@ -23,9 +23,14 @@
                                 <a class="nav-link" href="#">Page</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
+                                <a class="nav-link" href="http://146.83.198.35/~recreaubb/logout.php">Cerrar sesión</a>
                             </li>
                         </ul>
+                        <ul class="nav justify-content-end">
+                            <li class="nav-item">
+                                <a class="nav-link disabled" tabindex="-1" aria-disabled="true">Sesión: <?php echo $_SESSION["nombres"]?></a>
+                            </li>
+                        </ul>>
                     </div>
                 </div>
             </nav>
