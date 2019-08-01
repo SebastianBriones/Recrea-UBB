@@ -1,9 +1,10 @@
   <?php 
 
 	$conexion=mysqli_connect('localhost','recreaubb','recrea2019','recreaubb');
-	//$Nombre = $_POST['Nombre'];
-	//$Nombre = str_replace ( "'" , "" , $_POST['Nombre']);
+	 session_start();
 
+	$value = $_POST["value"];
+ 
  ?>
 <!DOCTYPE html>
 <html>
@@ -47,12 +48,8 @@
   
   
   <?php 
-    // if($Nombre !=""){
-		
-
-
-		//$sql="SELECT * from EVENTO WHERE EVE_CORREL='$Nombre'";
-		$sql="SELECT * FROM `EVENTO` WHERE 1";
+ 
+		$sql="SELECT * FROM `EVENTO` WHERE `EVE_CORREL` = '$value'";
 		$result=mysqli_query($conexion,$sql);
         $idrec=$Nombre;
 		
@@ -61,7 +58,7 @@
 			 $idBr=$mostrar['EVE_CORREL'];
 		 ?>
             <form class="formulario" action="" method="post" id="usrform" enctype="multipart/form-data">
-              <h2>Nuevo Evento</h2>
+              <h2>Modificar Evento</h2>
               <div class="form-group">
                 <label for="inputNombre">Nombre</label>
                 <input type="text" id="inputNombre" name="EVE_NOMBRE" class="form-control" value="<?php echo $mostrar['EVE_NOMBRE'] ?>" Required >
@@ -112,15 +109,7 @@
                 <input type="file" id="inputImagen" name="ARCHIVO" size="20" class="form-control" placeholder="Imagen" >
               </div>
 			  
-			  
-			  
-			  
-<div class="form-group">
-                <label for="inputNombre">Nombre</label>
-                <input type="text" id="inputNombre" name="EVE_CORREL" class="form-control" value="<?php echo $mostrar['EVE_CORREL'] ?>" Required >
-              </div>
-			  
-			  
+   
 			  
 			  
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" name="submit">Registrar</button>

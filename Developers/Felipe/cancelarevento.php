@@ -1,11 +1,11 @@
-<?php
-session_start();
+  <?php 
 
-	 $rut=$_SESSION["rut"]; 
+	$conexion=mysqli_connect('localhost','recreaubb','recrea2019','recreaubb');
+	 session_start();
 
-?>
-
-
+	$value = $_POST["value"];
+ 
+ ?>
 <!DOCTYPE html>
 <html>
 
@@ -13,7 +13,7 @@ session_start();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Nuevo evento</title>
+    <title>Cancelar evento</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- CSS -->
@@ -44,77 +44,88 @@ session_start();
             include("barra2.php");
         ?>
   
+  
+  
+  
+  <?php 
+ 
+		$sql="SELECT * FROM `EVENTO` WHERE `EVE_CORREL` = '$value'";
+		$result=mysqli_query($conexion,$sql);
+        $idrec=$Nombre;
+		
+		
+		while($mostrar=mysqli_fetch_array($result)){
+			 $idBr=$mostrar['EVE_CORREL'];
+		 ?>
             <form class="formulario" action="" method="post" id="usrform" enctype="multipart/form-data">
-              <h2>Nuevo Evento</h2>
+              <h2>Cancelar Evento</h2>
               <div class="form-group">
                 <label for="inputNombre">Nombre</label>
-                <input type="text" id="inputNombre" name="EVE_NOMBRE" class="form-control" placeholder="Escriba el nombre del evento" Required >
+                 <?php echo $mostrar['EVE_NOMBRE'] ?> 
               </div>
                <div class="form-group">
                 <label for="inputTitulo">Categoría</label>
-                 <select class="form-control form-control-sm"name="CAT_CORREL">
-                    <option value=''disabled selected>--Categorías--</option>
-            <?php 
-                 include("conexion.php");
-                 $result = mysqli_query($conn, 'SELECT * FROM CATEGORIA;');
-                 while($row=mysqli_fetch_assoc($result)) { 
-                    echo "<option value='$row[CAT_CORREL]'>$row[CAT_NOMBRE]</option>"; 
-                } 
-				include("desconexion.php");
-            ?> 
-                </select>
-                 
- 
+                  <?php echo $mostrar['EVE_CAT'] ?> 
               </div>
-			 
+			  
+			  
+               <input type="hidden" name="EVE_CORREL" value=' <?php echo $mostrar['EVE_CORREL'] ?> '/> 
+               
+              
               <div class="form-group">
                 <label for="inputFecha">Fecha</label>
-                <input type="date" id="inputFecha"name="EVE_FECHA" class="form-control" placeholder="Fecha" Required >
+               <?php echo $mostrar['EVE_CORREL'] ?> 
               </div>
-     
               <div class="form-group">
                 <label for="inputHora">Hora</label>
-                <input type="time" id="inputFecha"name="EVE_HORA" class="form-control" placeholder="hora" Required>
+              <?php echo $mostrar['EVE_HORA'] ?> 
               </div>
               <div class="form-group">
                 <label for="inputDescripcion">Descripción</label></br>
-                 <textarea name="EVE_DESCRIP" rows="5" cols="55" Required></textarea>
-              </div>
-              <div class="form-group">
-                <label for="inputFecha">Imagen(Opcional)</label>
-                <input type="file" id="inputImagen" name="ARCHIVO" size="20" class="form-control" placeholder="Imagen" >
-              </div>
-			   <input type="hidden" id="rut" name="RUT" value="<?php echo $rut ?>">
-			<!--  
-              <div class="form-group">
-                <label for="inputNombre">la funcion de la categoria no funciona escribir un numero aqui para que inserte x mientras</label>
-                <input type="text" id="inputNombre" name="CAT_CORREL" class="form-control" placeholder="Escriba el nombre del evento"  >
-              </div>   
-			  -->
+                 
+              <?php echo utf8_encode($mostrar['EVE_DESCRIP']) ?>
 			  
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" name="submit">Registrar</button>
+			  </div>
+              <div class="form-group">
+                <label for="inputFecha">Imagen actual</label></br>
+				<?php
+				echo '<img height="300" width="300" src="data:image/png;base64,'.base64_encode( $mostrar['IMAGEN'] ).'"/>';
+				?>
+                
+              </div>
+			  
+   
+			  
+			  
+              <button class="btn btn-danger" type="submit" name="submit">Cancelar</button>
             </form>
+			
+		   <?php 
+	}
+
+	
+	
+
+	 ?>	
+			
+			
         </div>
     </div>
 </body>
 </html>
 
-<?php
-include("guardarevento.php");
- 
 
+<?php
+include("guardarcancelarevento.php");
  if(isset($_POST['submit'])){
 	 
     
 	 
-    $campos = array("EVE_CORREL"=>$_POST['NULL'],"CAT_CORREL"=>$_POST['CAT_CORREL'],
-    "EVE_NOMBRE"=>$_POST['EVE_NOMBRE'],"EVE_FECHA"=>$_POST['EVE_FECHA']
-    ,"EVE_HORA"=>$_POST['EVE_HORA'],"EVE_DESCRIP"=>$_POST['EVE_DESCRIP'],"IMAGEN"=>$_POST['IMAGEN']
-	,"RUT"=>$rut); 
+    $campos = array("EVE_CORREL"=>$_POST['EVE_CORREL']); 
  
-    $a = new GuardarEvento("recreaubb"); 
-    $a->insertar($campos);
+    $a = new GuardarModificarEvento("recreaubb"); 
+    $a->modificar($campos);
  }
  
 ?>
- 
+

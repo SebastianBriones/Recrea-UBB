@@ -7,6 +7,7 @@
 	private $EVE_FECHA;
 	private $EVE_HORA;
 	private $EVE_DESCRIP;
+	private $RUT;
  
     function __construct($bd){
 	    $this->con = new mysqli('localhost','recreaubb','recrea2019',$bd); 
@@ -24,26 +25,37 @@
 		$EVE_HORA = $_POST['EVE_HORA'];
 		$EVE_DESCRIP =htmlentities($_POST['EVE_DESCRIP']);
 
-		
-		
+		$RUT = $_POST['RUT'];
+	 
         $consulta = "INSERT INTO `EVENTO` (`EVE_CORREL`,`CAT_CORREL`,`EST_CORREL`,`EVE_NOMBRE`,
 		`EVE_FECHA`,`EVE_HORA`,`EVE_DESCRIP`,`EVE_NOTA`,`IMAGEN`) VALUES 
 		(NULL,'$CAT_CORREL',NULL,'$EVE_NOMBRE','$EVE_FECHA',
 		'$EVE_HORA','$EVE_DESCRIP',NULL,'$imageData');";
+		
+		
+ 
 
+         
 
 		
         $resultado_cons = mysqli_query($this->con,$consulta);
-		
+	    $ultimo_id  = mysqli_insert_id($this->con);   
         if($resultado_cons == false){
 			echo "<script> 
-					 alert('Error en los datos');
+					 alert('No se ha creado el evento');
+					 
 				  </script>";
 		}else{
 			echo "<script>
-					alert('Registro Guardado');      
+					alert('Se ha creado el evento');      
 			      </script>"; 
 		}
+		
+		$consulta2 = "INSERT INTO `ORGANIZA` (`USU_RUT`, `EVE_CORREL`) VALUES ('$RUT', '$ultimo_id');";
+	    $resultado_cons2 = mysqli_query($this->con,$consulta2);
+		$consulta3 = "INSERT INTO `REALIZA` (`EVE_CORREL`, `ESP_NOMBRE`) VALUES ('$ultimo_id', '$ESP_CORREL');";
+	    //$resultado_cons3 = mysqli_query($this->con,$consulta3);
+		
 	}
  
  
